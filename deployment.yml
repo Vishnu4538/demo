@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gameapp
+  name: app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gameapp
+  template:
+    metadata:
+      labels:
+        app: gameapp
+    spec:
+      containers:
+      - image: docker.io/vishnu4538/nginxapp:56
+        name: gameapp
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1280Mi
+          requests:
+            cpu: 250m
+            memory: 64Mi
