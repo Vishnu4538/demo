@@ -24,7 +24,7 @@ def update_image(id,filename):
       print("Enter the correct file name and path or entered file  is no exist")
   else:
     r = yaml.safe_load(f)
-    r["spec"]["template"]["spec"]["containers"][0]["image"]=f"docker.io/vishnu4538/nginxapp:{id}"
+    r["spec"]["template"]["spec"]["containers"][0]["image"]=f"docker.io/vishnu4538/devsecops:{id}"
     f = open(filename, "w")
     print("changing the image tag ....")
     yaml.dump(r, f)
