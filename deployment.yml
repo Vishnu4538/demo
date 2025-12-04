@@ -15,7 +15,7 @@ spec:
         app: gameapp
     spec:
       containers:
-      - image: docker.io/vishnu4538/nginxapp:56
+      - image: docker.io/vishnu4538/nginxapp:58
         name: gameapp
         ports:
         - containerPort: 8080
