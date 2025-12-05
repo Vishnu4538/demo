@@ -30,7 +30,7 @@ agent {label 'agent'}
             }
           }
           
-          stage('static code analysis'){
+          stage('static code analysi'){
               steps{
                     withCredentials([string(credentialsId: 'snkyid', variable: 'token')]) {
                     sh ' snyk auth $token'
