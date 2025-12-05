@@ -1,3 +1,6 @@
+
+#Devosecops pipeline using Snyk tool.
+
 pipeline { 
 agent {label 'agent'}
         
