@@ -10,7 +10,7 @@ agent {label 'agent'}
             
             steps {
                   echo "pulling the github repo"
-                  git url: 'https://github.com/Vishnu4538/devsecops-demo.git', branch: 'main'
+                  git url: 'github repo', branch: 'main'
                   echo "Unit testing"
                   sh 'npm install'
                   sh 'npm audit fix --force || true'
@@ -46,7 +46,7 @@ agent {label 'agent'}
           steps{
                  withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                  sh 'echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin'
-                 sh 'docker build -t vishnu4538/devsecops:${BUILD_NUMBER} .'
+                 sh 'docker build -t DOCKER_USER/devsecops:${BUILD_NUMBER} .'
                    }
              }
          }
@@ -54,17 +54,17 @@ agent {label 'agent'}
             steps{
                 withCredentials([string(credentialsId: 'snkyid', variable: 'token')]) {
                 sh ' snyk auth $token'
-                sh 'snyk container test vishnu4538/devsecops:${BUILD_NUMBER} || true'
-                sh 'snyk container monitor vishnu4538/devsecops:${BUILD_NUMBER}'
+                sh 'snyk container test DOCKER_USER/devsecops:${BUILD_NUMBER} || true'
+                sh 'snyk container monitor DOCKER_USER/devsecops:${BUILD_NUMBER}'
 
                 }
-                sh 'docker push vishnu4538/devsecops:${BUILD_NUMBER}'
+                sh 'docker push DOCKER_USER/devsecops:${BUILD_NUMBER}'
               }
          }
        stage('Changing the image and updateing the manifest file'){
            steps {
-                    git url: 'https://github.com/Vishnu4538/demo.git', branch: 'main'
-                    echo "chaanging the image"
+                    git url: 'github repo', branch: 'main'
+                    echo "changing the image"
                     sh ' python3 image_update.py ${BUILD_NUMBER}'
                      withCredentials([gitUsernamePassword(credentialsId: 'git', gitToolName: 'Default')]) {
                      sh '''
