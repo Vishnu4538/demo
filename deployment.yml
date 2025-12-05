@@ -15,10 +15,10 @@ spec:
         app: gameapp
     spec:
       containers:
-      - image: docker.io/vishnu4538/devsecops:105
+      - image: docker.io/vishnu4538/devsecops:32
         name: gameapp
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         resources:
           limits:
             cpu: 500m
