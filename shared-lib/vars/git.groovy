@@ -6,3 +6,4 @@ def call(String git_user){
                   sh 'npm install'
                   sh 'npm audit fix --force || true'
                   sh 'npm run test'
+}
